@@ -29,3 +29,6 @@ This is a PHP-based password manager built with security in mind. It includes:
 2. Import the SQL database
 3. Configure `db.php`
 4. Run on localhost via XAMPP
+
+# Vaultify
+A secure and easy-to-use PHP-based password manager.
