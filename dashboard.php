@@ -165,7 +165,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <div class="dashboard-container">
-        <h2>🔐 Welcome to your Password Manager</h2>
+        <h2>Vaultify Password Manager</h2>
         <p>Choose an action below:</p>
         <a href="add_password.php">Add New Password</a>
         <a href="view_passwords.php">View Saved Passwords</a>

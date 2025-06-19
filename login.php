@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - Password Manager</title>
+    <title>Login - Vaultify</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
     <div class="form-container">
-        <h2>🔐 Login to Your Vault</h2>
+        <h2> Login to Vaultify</h2>
         <?php if (!empty($message)): ?>
             <p class="error"><?php echo $message; ?></p>
         <?php endif; ?>
