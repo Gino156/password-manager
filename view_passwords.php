@@ -249,7 +249,7 @@ $stmt->close();
             const span = elem.previousElementSibling;
             if (span.textContent === "••••••") {
                 span.textContent = span.dataset.password;
-                elem.textContent = "🙈";
+                elem.textContent = "👁️";
             } else {
                 span.textContent = "••••••";
                 elem.textContent = "👁️";
