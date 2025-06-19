@@ -1,0 +1,17 @@
+{
+    "name": "lg/passmanager",
+    "autoload": {
+        "psr-4": {
+            "Lg\\Passmanager\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gino Reyes",
+            "email": "ginoreyes1151@gmail.com"
+        }
+    ],
+    "require": {
+        "sonata-project/google-authenticator": "^2.3"
+    }
+}
