@@ -26,32 +26,20 @@ This is a PHP-based password manager built with security in mind. It includes:
 ## 📁 Setup
 
 1. Clone the repository
-2. Import the SQL database
-3. Configure `db.php`
-4. Run on localhost via XAMPP
+2. Import the SQL database (e.g., `vaultify.sql`) via phpMyAdmin
+3. Copy and configure the database file:
+    ```bash
+    cp db.sample.php db.php
+    ```
+    Open `db.php` and set your actual DB credentials.
+4. Install Composer dependencies:
+    ```bash
+    composer install
+    ```
+5. Run the app on localhost via XAMPP or PHP built-in server
 
-🔐 2FA Setup (OTP via Google Authenticator)
-Vaultify uses sonata-project/google-authenticator for TOTP-based 2FA.
+> 🔐 Note: `db.php` is excluded from the repo for security. Only share it locally.
 
-🧰 Install Composer (Required for 2FA)
-Visit: https://getcomposer.org/download/
-
-Download and install Composer for Windows.
-
-During installation, point to your PHP path (usually C:\xampp\php\php.exe).
-
-After install, verify it via Git Bash or CMD:
-composer --version
-
-In your project root, run:
-composer require sonata-project/google-authenticator
-
-📱 Download Authenticator App
-Use this app to scan QR codes for OTP:
-
-Google Authenticator for Android
-
-Google Authenticator for iOS
 
 # Vaultify
 A secure and easy-to-use PHP-based password manager.
