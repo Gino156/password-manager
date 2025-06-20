@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($stmt->execute()) {
             $success = true;
-            $message = "✅ Registration successful! Redirecting to login...";
-            echo "<script>setTimeout(() => window.location.href = 'login.php', 3000);</script>";
+            $message = "✅ Registration successful! Redirecting to setup...";
+            echo "<script>setTimeout(() => window.location.href = 'setup_2fa.php', 3000);</script>";
         } else {
             $message = "❌ Error: " . $stmt->error;
         }
