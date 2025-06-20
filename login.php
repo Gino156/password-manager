@@ -116,12 +116,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             text-align: center;
             margin-bottom: 10px;
         }
+
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .register-link a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
     <div class="form-container">
-        <h2> Login to Vaultify</h2>
+        <h2>🔐 Login to Vaultify</h2>
         <?php if (!empty($message)): ?>
             <p class="error"><?php echo $message; ?></p>
         <?php endif; ?>
@@ -130,6 +144,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+        <div class="register-link">
+            Don't have an account?
+            <a href="register.php">Register here</a>
+        </div>
     </div>
 </body>
 

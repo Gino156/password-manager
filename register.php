@@ -1,6 +1,7 @@
 <?php
 require 'db.php';
 $message = "";
+$success = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username']);
@@ -16,7 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bind_param("sss", $username, $email, $passwordHash);
 
         if ($stmt->execute()) {
-            $message = "✅ Registration successful! <a href='login.php'>Login here</a>";
+            $success = true;
+            $message = "✅ Registration successful! Redirecting to login...";
+            echo "<script>setTimeout(() => window.location.href = 'login.php', 3000);</script>";
         } else {
             $message = "❌ Error: " . $stmt->error;
         }
@@ -27,10 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Register - Password Manager</title>
+    <meta charset="UTF-8">
+    <title>Register - Vaultify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -75,6 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             box-sizing: border-box;
         }
 
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            color: gray;
+        }
+
         .form-container button {
             width: 100%;
             margin-top: 20px;
@@ -95,12 +114,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .message {
             margin-top: 15px;
             font-size: 14px;
-            color: #d8000c;
             text-align: center;
+            color: red;
         }
 
         .success {
             color: #2e7d32;
+        }
+
+        .redirect {
+            text-align: center;
+            margin-top: 15px;
         }
 
         a {
@@ -120,12 +144,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>🔐 Register Account</h2>
 
         <?php if ($message): ?>
-            <div class="message <?php echo (strpos($message, '✅') !== false) ? 'success' : ''; ?>">
+            <div class="message <?php echo $success ? 'success' : ''; ?>">
                 <?php echo $message; ?>
             </div>
         <?php endif; ?>
 
-        <form method="POST">
+        <form method="POST" autocomplete="off">
             <label for="username">Username:</label>
             <input type="text" name="username" required>
 
@@ -133,11 +157,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="email" name="email" required>
 
             <label for="password">Password:</label>
-            <input type="password" name="password" required>
+            <div class="password-wrapper">
+                <input type="password" name="password" id="password" required>
+                <span class="toggle-icon" onclick="togglePassword()">👁️</span>
+            </div>
 
             <button type="submit">Register</button>
         </form>
+
+        <div class="redirect">
+            Already have an account?
+            <a href="login.php">Login here</a>
+        </div>
     </div>
+
+    <script>
+        function togglePassword() {
+            const passInput = document.getElementById("password");
+            passInput.type = passInput.type === "password" ? "text" : "password";
+        }
+    </script>
 
 </body>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$timeout = 10;
+$timeout = 60;
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout) {
     session_unset();
     session_destroy();
@@ -32,7 +32,7 @@ if (!isset($_SESSION['user_id'])) {
             inactivityTimer = setTimeout(() => {
                 alert("⏰ You have been logged out due to inactivity.");
                 window.location.href = "logout.php?timeout=1";
-            }, 10000);
+            }, 60000);
         }
 
         window.onload = resetInactivityTimer;

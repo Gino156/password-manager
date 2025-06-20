@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 require 'crypto.php';
 
-$timeout = 10;
+$timeout = 60;
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout) {
     session_unset();
     session_destroy();
@@ -172,7 +172,7 @@ $stmt->close();
             inactivityTimer = setTimeout(() => {
                 alert("⏰ Session expired due to inactivity.");
                 window.location.href = "logout.php?timeout=1";
-            }, 10000);
+            }, 60000);
         }
 
         window.onload = function() {
