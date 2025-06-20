@@ -34,7 +34,6 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +41,7 @@ $stmt->close();
     <meta charset="UTF-8">
     <title>View Passwords</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -114,7 +114,7 @@ $stmt->close();
 
         .container {
             max-width: 1000px;
-            margin: 80px auto;
+            margin: 100px auto 60px;
             background: #fff;
             padding: 30px 40px;
             border-radius: 12px;
@@ -126,9 +126,15 @@ $stmt->close();
             box-shadow: 0 10px 25px rgba(255, 255, 255, 0.03);
         }
 
+        .logo {
+            width: 140px;
+            margin-bottom: -30px;
+            margin-top: -30px;
+        }
+
         h2 {
             text-align: center;
-            margin-bottom: 25px;
+            margin: 20px 0;
         }
 
         .back-btn {
@@ -161,6 +167,16 @@ $stmt->close();
             margin-left: 5px;
             cursor: pointer;
             color: #0d6efd;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .logo {
+                width: 100px;
+            }
         }
     </style>
 
@@ -196,6 +212,8 @@ $stmt->close();
     </div>
 
     <div class="container">
+        <img src="images/logo.png" alt="Vaultify Logo" class="logo">
+
         <h2>🔎 Your Stored Passwords</h2>
         <table id="passwordTable">
             <thead>

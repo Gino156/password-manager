@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <title>Add Password</title>
+    <title>Add Password - Vaultify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -121,6 +122,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             padding: 30px 40px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container img.logo {
+            display: block;
+            margin: -30px auto -30px auto;
+            width: 150px;
+            height: auto;
         }
 
         .dark-mode .container {
@@ -137,6 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-weight: bold;
             margin-top: 15px;
             display: block;
+            text-align: left;
         }
 
         input {
@@ -252,6 +262,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background-color: #2a2a2a;
             color: white;
         }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+
+            .container img.logo {
+                width: 120px;
+            }
+        }
     </style>
 
     <script>
@@ -286,7 +306,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
 
     <div class="container">
-        <h2>🔐 Add New Password</h2>
+        <img src="images/logo.png" alt="Vaultify Logo" class="logo">
+        <h2>Add New Password</h2>
 
         <?php if (isset($success)) echo "<p class='success' onclick='showModal()'>$success</p>"; ?>
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>

@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #f2f4f8;
+            background-color: #eef1f5;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,44 +71,65 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .form-container {
             background-color: #ffffff;
-            padding: 30px 40px;
+            padding: 40px 35px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .form-container img.logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: -50px;
+            margin-top: -50px;
         }
 
         .form-container h2 {
             margin-bottom: 20px;
-            color: #333;
-            text-align: center;
+            color: #222;
+            font-weight: 600;
         }
 
         .form-container input[type="text"],
         .form-container input[type="password"] {
             width: 100%;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid #ccc;
-            font-size: 14px;
+            font-size: 15px;
             margin-bottom: 15px;
             box-sizing: border-box;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
         }
 
         .form-container button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50;
+            background-color: #007bff;
             border: none;
             color: white;
             font-size: 16px;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .form-container button:hover {
-            background-color: #45a049;
+            background-color: #0069d9;
         }
 
         .error {
@@ -120,6 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .register-link {
             text-align: center;
             margin-top: 15px;
+            font-size: 14px;
         }
 
         .register-link a {
@@ -135,20 +157,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
     <div class="form-container">
-        <h2>🔐 Login to Vaultify</h2>
+        <img src="images/logo.png" alt="Vaultify Logo" class="logo">
+        <h2>Login to Vaultify</h2>
         <?php if (!empty($message)): ?>
             <p class="error"><?php echo $message; ?></p>
         <?php endif; ?>
         <form method="POST">
             <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <div class="password-wrapper">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
             <button type="submit">Login</button>
         </form>
         <div class="register-link">
-            Don't have an account?
-            <a href="register.php">Register here</a>
+            Don't have an account? <a href="register.php">Register here</a>
         </div>
     </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const icon = document.querySelector(".toggle-password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.textContent = "👁️";
+            } else {
+                passwordInput.type = "password";
+                icon.textContent = "👁️";
+            }
+        }
+    </script>
 </body>
 
 </html>

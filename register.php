@@ -49,23 +49,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .form-container {
             background-color: #ffffff;
-            padding: 30px 40px;
+            padding: 40px 35px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .form-container img.logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: -50px;
+            margin-top: -50px;
         }
 
         .form-container h2 {
             margin-bottom: 20px;
-            color: #333;
-            text-align: center;
+            color: #222;
+            font-weight: 600;
         }
 
         .form-container label {
             display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
+            text-align: left;
+            margin: 10px 0 5px;
             font-weight: 500;
         }
 
@@ -74,9 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .form-container input[type="password"] {
             width: 100%;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid #ccc;
-            font-size: 14px;
+            font-size: 15px;
             box-sizing: border-box;
         }
 
@@ -98,17 +106,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             width: 100%;
             margin-top: 20px;
             padding: 12px;
-            background-color: #4CAF50;
+            background-color: #007bff;
             border: none;
             color: white;
             font-size: 16px;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .form-container button:hover {
-            background-color: #45a049;
+            background-color: #0069d9;
         }
 
         .message {
@@ -125,14 +133,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .redirect {
             text-align: center;
             margin-top: 15px;
+            font-size: 14px;
         }
 
-        a {
+        .redirect a {
             color: #007bff;
             text-decoration: none;
         }
 
-        a:hover {
+        .redirect a:hover {
             text-decoration: underline;
         }
     </style>
@@ -141,7 +150,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 
     <div class="form-container">
-        <h2>🔐 Register Account</h2>
+        <img src="images/logo.png" alt="Vaultify Logo" class="logo">
+        <h2>Register Account</h2>
 
         <?php if ($message): ?>
             <div class="message <?php echo $success ? 'success' : ''; ?>">
@@ -166,15 +176,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
 
         <div class="redirect">
-            Already have an account?
-            <a href="login.php">Login here</a>
+            Already have an account? <a href="login.php">Login here</a>
         </div>
     </div>
 
     <script>
         function togglePassword() {
             const passInput = document.getElementById("password");
-            passInput.type = passInput.type === "password" ? "text" : "password";
+            const icon = document.querySelector(".toggle-icon");
+            if (passInput.type === "password") {
+                passInput.type = "text";
+                icon.textContent = "👁️";
+            } else {
+                passInput.type = "password";
+                icon.textContent = "👁️";
+            }
         }
     </script>
 

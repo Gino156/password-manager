@@ -21,37 +21,24 @@ if (!isset($_SESSION['user_id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Password Manager</title>
+    <title>Vaultify Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script>
-        let inactivityTimer;
-
-        function resetInactivityTimer() {
-            clearTimeout(inactivityTimer);
-            inactivityTimer = setTimeout(() => {
-                alert("⏰ You have been logged out due to inactivity.");
-                window.location.href = "logout.php?timeout=1";
-            }, 60000);
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
         }
 
-        window.onload = resetInactivityTimer;
-        window.onmousemove = resetInactivityTimer;
-        window.onkeydown = resetInactivityTimer;
-        window.onclick = resetInactivityTimer;
-        window.onscroll = resetInactivityTimer;
-    </script>
-
-    <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f2f4f8;
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s ease;
         }
 
         .dark-mode {
@@ -59,132 +46,158 @@ if (!isset($_SESSION['user_id'])) {
             color: #f4f4f4;
         }
 
-        .dashboard-container {
-            background-color: #fff;
-            padding: 40px 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        .card {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
             text-align: center;
+            max-width: 460px;
             width: 100%;
-            max-width: 600px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dark-mode .dashboard-container {
-            background-color: #1f1f1f;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .dark-mode h2 {
-            color: #f4f4f4;
-        }
-
-        a {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
             transition: background-color 0.3s ease;
         }
 
-        a:hover {
-            background-color: #45a049;
+        .dark-mode .card {
+            background-color: #1e1e1e;
         }
 
-        .toggle-switch {
+        .card img.logo {
+            width: 150px;
+            height: auto;
+            margin-top: -30px;
+            margin-bottom: -30px;
+        }
+
+        .card h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .dark-mode .card h1 {
+            color: #f4f4f4;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .dark-mode .card p {
+            color: #bbb;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 14px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0069d9;
+        }
+
+        .btn.logout {
+            background-color: #dc3545;
+        }
+
+        .btn.logout:hover {
+            background-color: #c82333;
+        }
+
+        .theme-toggle {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 25px;
         }
 
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
+        .theme-toggle input {
+            display: none;
         }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        .toggle-label {
             background-color: #ccc;
             border-radius: 30px;
-            transition: 0.4s;
+            width: 50px;
+            height: 26px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
         }
 
-        .slider:before {
-            position: absolute;
+        .toggle-label::before {
             content: "🌞";
-            height: 26px;
-            width: 26px;
+            position: absolute;
             left: 2px;
-            bottom: 2px;
+            top: 2px;
+            width: 22px;
+            height: 22px;
             background-color: white;
             border-radius: 50%;
-            transition: 0.4s;
-            font-size: 16px;
             text-align: center;
-            line-height: 26px;
+            line-height: 22px;
+            font-size: 13px;
+            transition: 0.3s;
         }
 
-        input:checked+.slider {
-            background-color: #4f4f4f;
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(30px);
+        #themeSwitch:checked+.toggle-label::before {
+            transform: translateX(24px);
             content: "🌙";
+        }
+
+        #themeSwitch:checked+.toggle-label {
+            background-color: #555;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .card img.logo {
+                width: 120px;
+            }
         }
     </style>
 </head>
 
 <body onload="loadTheme()">
-    <div class="toggle-switch">
-        <label class="switch">
-            <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
-            <span class="slider"></span>
-        </label>
+    <div class="theme-toggle">
+        <input type="checkbox" id="themeSwitch" onchange="toggleTheme()">
+        <label for="themeSwitch" class="toggle-label"></label>
     </div>
 
-    <div class="dashboard-container">
-        <h2>Vaultify Password Manager</h2>
-        <p>Choose an action below:</p>
-        <a href="add_password.php">Add New Password</a>
-        <a href="view_passwords.php">View Saved Passwords</a>
-        <a href="logout.php">Logout</a>
+    <div class="card">
+        <img src="images/logo.png" alt="Vaultify Logo" class="logo">
+        <p>Securely manage your saved passwords.</p>
+
+        <a href="add_password.php" class="btn">➕ Add New Password</a>
+        <a href="view_passwords.php" class="btn">🔐 View Saved Passwords</a>
+        <a href="logout.php" class="btn logout">Logout</a>
     </div>
 
     <script>
         function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
-            const isDark = document.body.classList.contains("dark-mode");
+            const isDark = document.body.classList.toggle("dark-mode");
             localStorage.setItem("theme", isDark ? "dark" : "light");
-            document.getElementById("themeToggle").checked = isDark;
+            document.getElementById("themeSwitch").checked = isDark;
         }
 
         function loadTheme() {
             const theme = localStorage.getItem("theme");
             if (theme === "dark") {
                 document.body.classList.add("dark-mode");
-                document.getElementById("themeToggle").checked = true;
+                document.getElementById("themeSwitch").checked = true;
             }
         }
     </script>
