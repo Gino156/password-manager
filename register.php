@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'db.php';
 $message = "";
 $success = false;
@@ -17,9 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bind_param("sss", $username, $email, $passwordHash);
 
         if ($stmt->execute()) {
-            $success = true;
-            $message = "✅ Registration successful! Redirecting to setup...";
-            echo "<script>setTimeout(() => window.location.href = 'setup_2fa.php', 3000);</script>";
+            $userId = $conn->insert_id; // Get last inserted ID
+            $_SESSION['user_id'] = $userId;
+
+            header("Location: setup_2fa.php");
+            exit();
         } else {
             $message = "❌ Error: " . $stmt->error;
         }
